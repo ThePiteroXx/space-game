@@ -32,7 +32,7 @@ class Game {
   newGame() {
     this.htmlElements.modal.classList.add("hide");
     this.reloadMissile = 4000;
-    this.enemiesInterval = 40;
+    this.enemiesInterval = 30;
     this.lives = 3;
     this.score = 0;
     this.updateLivesText();
@@ -193,8 +193,10 @@ class Game {
 
   updateScore() {
     this.score++;
-    if (!(this.score % 3)) {
+    if (!(this.score % 6)) {
       this.enemiesInterval--;
+    }
+    if (!(this.score % 3)) {
       this.reloadMissile -= 10;
     }
     this.updateScoreText();
