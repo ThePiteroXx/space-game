@@ -193,7 +193,7 @@ class Game {
 
   updateScore() {
     this.score++;
-    if (!(this.score % 6)) {
+    if (!(this.score % 10)) {
       this.enemiesInterval--;
     }
     if (!(this.score % 3)) {
