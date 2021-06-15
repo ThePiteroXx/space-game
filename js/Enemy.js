@@ -75,7 +75,10 @@ export class Enemy {
     this.lives--;
     if (!this.lives) {
       this.explode();
-      setTimeout(() => (this.missiles.forEach(missile => missile.remove())), 5000)
+      setTimeout(
+        () => this.missiles.forEach((missile) => missile.remove()),
+        5000
+      );
     }
   }
 
@@ -105,5 +108,4 @@ export class Enemy {
     );
     setTimeout(() => this.element.remove(), animationTime);
   }
-
 }

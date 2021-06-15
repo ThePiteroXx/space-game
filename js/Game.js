@@ -32,7 +32,7 @@ class Game {
   newGame() {
     this.htmlElements.modal.classList.add("hide");
     this.reloadMissile = 4000;
-    this.enemiesInterval = 30;
+    this.enemiesInterval = 40;
     this.lives = 3;
     this.score = 0;
     this.updateLivesText();
@@ -49,9 +49,9 @@ class Game {
   endGame() {
     this.htmlElements.modal.classList.remove("hide");
     this.htmlElements.scoreInfo.textContent = `You loose! Your score is: ${this.score}`;
-    this.enemies.forEach(enemy => {
+    this.enemies.forEach((enemy) => {
       enemy.explode();
-      enemy.missiles.forEach(missile => missile.remove());
+      enemy.missiles.forEach((missile) => missile.remove());
     });
     this.enemies.length = 0;
     clearInterval(this.createEnemyInterval);
@@ -70,12 +70,12 @@ class Game {
       : this.createNewEnemy(
           this.htmlElements.container,
           this.enemiesInterval * 2,
-          "enemy--big", 
+          "enemy--big",
           "explosion--big",
           3
         );
 
-    if (this.score > -1 && (randomNumber % 3)) {
+    if (this.score > 50 && !(randomNumber % 3)) {
       this.createNewEnemy(
         this.htmlElements.container,
         this.enemiesInterval,
@@ -111,10 +111,13 @@ class Game {
     this.enemies.forEach((enemy) => {
       enemy.missiles.forEach((missile, missileIndex, missileArr) => {
         const missilePosition = {
-          top: missile.element.offsetTop
+          top: missile.element.offsetTop,
         };
-  
-        if (missilePosition.top >= window.innerHeight - missile.element.offsetHeight - 1) {
+
+        if (
+          missilePosition.top >=
+          window.innerHeight - missile.element.offsetHeight - 1
+        ) {
           missile.remove();
           missileArr.splice(missileIndex, 1);
         }
@@ -167,7 +170,7 @@ class Game {
           right: this.ship.element.offsetLeft + this.ship.element.offsetWidth,
           bottom: this.ship.element.offsetTop + this.ship.element.offsetHeight,
           left: this.ship.element.offsetLeft,
-        }
+        };
 
         const missileEnemyPosition = {
           top: missile.element.offsetTop,
@@ -183,7 +186,6 @@ class Game {
         ) {
           this.updateLives();
           missile.remove();
-
         }
       });
     });
@@ -193,7 +195,7 @@ class Game {
     this.score++;
     if (!(this.score % 3)) {
       this.enemiesInterval--;
-      this.reloadMissile -= 30;
+      this.reloadMissile -= 10;
     }
     this.updateScoreText();
   }
